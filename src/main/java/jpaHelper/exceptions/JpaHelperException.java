@@ -18,6 +18,16 @@ public class JpaHelperException extends Exception {
 		this.errorEx = _errorEx;
 	}
 
+
+	public ErrorEnum getMsj() {
+		return msj;
+	}
+
+
+	public void setMsj(ErrorEnum msj) {
+		this.msj = msj;
+	}
+
 	
 	
 	

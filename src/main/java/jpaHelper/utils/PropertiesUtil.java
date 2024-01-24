@@ -1,6 +1,6 @@
 package jpaHelper.utils;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,13 +9,16 @@ import jpaHelper.exceptions.enums.ErrorEnum;
 
 public class PropertiesUtil {
 	
-	private static final String path = "D:\\CONFIG\\JPAHELPER\\config.properties";
+	private static final String path = "config.properties";
 	
 	public static Properties get() throws JpaHelperException {
 		Properties p = new Properties();
+		
+		String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+		String appConfigPath = rootPath + "config.properties";
 	    try {
-			FileReader reader=new FileReader(path);  	    	   
-			p.load(reader);
+	    	p.load(new FileInputStream(appConfigPath));	    	   
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw  new JpaHelperException(e.getMessage(), ErrorEnum.ERROR_CARGANDO_ARCHIVO);
